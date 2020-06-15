@@ -8,9 +8,11 @@ export default class AddBook extends Component {
             author : '',
             publishers : '',
             pages :'',
-            genres : []
+            genres : [],
+            updatedMessage : ''
        }
-       async componentDidMount() { 
+       
+        async componentDidMount() { 
         this.props.getSingleBook(this.props.match.params._id)
 
         const genres = await axios.get('http://localhost:5000/api/genres')
@@ -38,15 +40,18 @@ export default class AddBook extends Component {
     .then(res => console.log(res))
     .catch(err => console.log("error occured while posting data ", err)) 
     console.log(book)
+    this.setState({updatedMessage : "Book Updated Successfully."})
     window.location = "/books"
     }
 
     render() {
-      const { name, author, publishers, pages, genres } = this.state;
+      const { name, author, publishers, pages, genres, updatedMessage } = this.state;
       const { book, isLoading } = this.props;
         return (
         <div className="container">
             <h2>Update BOOK </h2>
+            { updatedMessage && <h2 style={{textAlign : 'center'}} className="alert alert-info">{updatedMessage}</h2> }
+
             <form onSubmit = { this.onFormSubmit }>
               <div className="form-group">
                 <label htmlFor="name">BookName:</label>
@@ -84,10 +89,11 @@ export default class AddBook extends Component {
               <div className="form-group">
                 <label htmlFor="genres">Category:</label>
                 <select type="select" className="form-control" id="genres" 
-                placeholder="Select genres" name="genres"
-                value={genres}
-                onChange={this.onInputChange}
-                > 
+                        placeholder="Select genres" name="genres"
+                        value={genres}
+                        onChange={this.onInputChange}
+                  >    
+                   <option value="Select_Category" > Select Category </option>
                      { 
                       genres.map( genre => (
                         <option value={genre.name}>{genre.name }</option> 

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 export default class AddCategory extends Component {
     state = {
-      name : ''
+      name : '',
+      addedMessage : ''
     }
 
     onInputChange = (e) => {
@@ -17,17 +18,21 @@ export default class AddCategory extends Component {
         }
 
     axios.post('http://localhost:5000/api/genres', genre)
+    .then(this.setState({addedMessage : 'category has been added !'}))
     .then(res => console.log(res))
     .catch(err => console.log("error occured while posting data ", err)) 
+
     console.log(genre)
     window.location = "/categories"
     }
 
     render() {
-      const { name } = this.state;
+      const { name , addedMessage } = this.state;
         return (
         <div className="container">
             <h2>ADD Category </h2>
+            { addedMessage && <h2 style={{textAlign : 'center'}} className="alert alert-info">{addedMessage}</h2> }
+
             <form onSubmit = { this.onFormSubmit}>
               <div className="form-group">
                 <label htmlFor="name">Category Name:</label>

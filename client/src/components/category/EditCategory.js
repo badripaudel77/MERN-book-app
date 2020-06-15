@@ -4,6 +4,7 @@ import axios from 'axios'
 export default class EditCategory extends Component {
       state = {
             name : "",
+            updatedMessage : ''
        }
       
        componentDidMount() {
@@ -25,6 +26,7 @@ export default class EditCategory extends Component {
     axios.put(`http://localhost:5000/api/genres/${category._id}`, category)
     .catch( error => console.log("error occured ")) //set error to the state var and ...
    // console.log(category)
+   this.setState({updatedMessage : 'Category Has been Updated !'})
     window.location = "/categories"
     }
 
@@ -39,6 +41,7 @@ export default class EditCategory extends Component {
         return (
         <div className="container">
             <h2>Update CATEGORY </h2>
+         { this.state.updatedMessage && <h2 style={{textAlign : 'center'}} className="alert alert-info">{this.state.updatedMessage}</h2> }
             <form onSubmit = { this.onFormSubmit }>
               <div className="form-group">
                 <label htmlFor="name">Category Name:</label>
