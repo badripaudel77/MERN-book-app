@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import { CategoryItem } from './CategoryItem';
 
 export default class Category extends Component {

@@ -9,20 +9,29 @@ export default class AddBook extends Component {
             publishers : '',
             pages :'',
             genres : [],
+            genre : '',
             updatedMessage : ''
        }
        
         async componentDidMount() { 
-        this.props.getSingleBook(this.props.match.params._id)
+        this.props.getSingleBook(this.props.match.params._id);
 
-        const genres = await axios.get('http://localhost:5000/api/genres')
-        this.setState({ genres : genres.data})
-        console.log('am i working ? ', this.props.match.params._id)
+        const genres = await axios.get('http://localhost:5000/api/genres');
+        this.setState({ genres : genres.data});
+
+        console.log('am i working ? ', this.props.match.params._id);
       }
 
-      onInputChange = (e) => {
-      this.setState({[e.target.name] : e.target.value }) //looks for name
+      componentWillUnmount() {
+        // fix Warning: Can't perform a React state update on an unmounted component
+        this.setState = (state,callback)=>{
+            return;
+        };
     }
+
+      onInputChange = (e) => {
+        this.setState({[e.target.name] : e.target.value }) //looks for name
+      }
 
     onFormSubmit = (e) => {
       e.preventDefault();
@@ -45,8 +54,9 @@ export default class AddBook extends Component {
     }
 
     render() {
-      const { name, author, publishers, pages, genres, updatedMessage } = this.state;
+      const { name, author, publishers, pages, genres,genre, updatedMessage } = this.state;
       const { book, isLoading } = this.props;
+    
         return (
         <div className="container">
             <h2>Update BOOK </h2>
@@ -56,47 +66,47 @@ export default class AddBook extends Component {
               <div className="form-group">
                 <label htmlFor="name">BookName:</label>
                   <input type="text" required className="form-control" id="name" 
-                  placeholder="Enter Book name" name="name"
-                  value={book.name} 
-                  onChange={this.onInputChange}
+                   name="name"
+                  defaultValue = {book.name || '' } 
+                  onChange={this.onNameInputChange}
                   />
               </div>
               <div className="form-group">
                 <label htmlFor="author">Author:</label>
                   <input type="text" required={ true } className="form-control" 
-                  id="author" placeholder="Enter Author" name="author" 
+                  id="author" name="author" 
                   onChange={this.onInputChange}
-                  value={author}
+                  defaultValue = {book.author || ''}
                   />
               </div>
               <div className="form-group">
                 <label htmlFor="publishers">Publishers:</label>
                   <input type="text" required className="form-control" 
-                  id="publishers" placeholder="Enter Publishers Name"
+                  id="publishers"
                   name="publishers" 
                   onChange={this.onInputChange}
-                  value={publishers}
+                  defaultValue={book.publishers || ''}
                   />
               </div>
               <div className="form-group">
                 <label htmlFor="pages">Pages:</label>
                 <input type="number" required className="form-control"
-                 id="pages" placeholder="Enter No of Page" name="pages" 
+                 id="pages" name="pages" 
                  onChange={this.onInputChange}
-                 value={pages}
+                 defaultValue={book.pages || ''}
                  />
               </div>
               <div className="form-group">
                 <label htmlFor="genres">Category:</label>
-                <select type="select" className="form-control" id="genres" 
-                        placeholder="Select genres" name="genres"
-                        value={genres}
-                        onChange={this.onInputChange}
-                  >    
-                   <option value="Select_Category" > Select Category </option>
-                     { 
+                <select type="select" className="form-control" 
+                id="genre" 
+                name="genre"
+                onChange={this.onInputChange}
+                > 
+                 <option value="selectCategory">Select</option>
+                  { 
                       genres.map( genre => (
-                        <option value={genre.name}>{genre.name }</option> 
+                        <option key={genre._id} value={genre.name}>{genre.name }</option> 
                       ))
                   }
                 </select>

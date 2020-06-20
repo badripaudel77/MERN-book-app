@@ -1,5 +1,5 @@
-import React, {Fragment} from 'react'
-import {BrowserRouter as Router,  Link } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom'
 export const Navbar = () => {
     return (
         <div>

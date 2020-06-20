@@ -5,23 +5,32 @@ const bookSchema = mongoose.Schema({
     name : {
           type : String,
           required : true,
+          trim : true,
+          unique : true //title is made unique.
     },
     author : {
-
         type : String,
         required : true,
+        trim : true
+
     },
     publishers : {
-        type : String
+        type : String,
+        trim : true,
+
     },
 
     pages : {
         type : Number,
         required : true,
+        trim : true
+
     },
     genres : {
         type : String,
         required : true,
+        trim : true
+
     },
 
     create_date : {
@@ -30,6 +39,8 @@ const bookSchema = mongoose.Schema({
     }
 })
 
+//It will create books collection in your database and documents 
+//inside that collection will have fields from bookSchema when you save first document.
 const Book = module.exports = mongoose.model('Book', bookSchema)
 
 //get the books
@@ -46,7 +57,6 @@ module.exports.getBookById = (id,callback) => {
 
 module.exports.addBook = (book,callback) => {
     Book.create(book, callback);
-   // Genre.find(callback).limit(limit)
 }
 
 module.exports.updateBook = (id,book,options, callback) => {
@@ -62,7 +72,6 @@ module.exports.updateBook = (id,book,options, callback) => {
         genres : book.genres
     } 
     Book.findByIdAndUpdate(query, updatedBook, {} , callback);
-   // Genre.find(callback).limit(limit)
 }
 
 module.exports.deleteBook = (id,callback) => {
@@ -70,5 +79,4 @@ module.exports.deleteBook = (id,callback) => {
         _id : id
     }
     Book.findByIdAndDelete(query, callback);
-   // Genre.find(callback).limit(limit)
 }

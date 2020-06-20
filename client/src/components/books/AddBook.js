@@ -85,13 +85,15 @@ export default class AddBook extends Component {
               </div>
               <div className="form-group">
                 <label htmlFor="genre">Category:</label>
-                <select type="select" className="form-control" id="genre" 
-                 name="genre"
+                <select type="select" className="form-control" 
+                id="genre" 
+                name="genre"
                 onChange={this.onInputChange}
                 > 
+                 <option value="selectCategory">Select</option>
                   { 
                       genres.map( genre => (
-                        <option value={genre.name}>{genre.name }</option> 
+                        <option key={genre._id} value={genre.name}>{genre.name }</option> 
                       ))
                   }
                 </select>

@@ -3,14 +3,16 @@ const mongoose = require('mongoose')
 
 const genereSchema = mongoose.Schema({
     name : {
-           type : String,
+          type : String,
           required : true,
+          trim : true,
+          unique : true,
           createdAt : new Date()
     },
     create_date : {
         type : Date,
         default : Date.now
-    }
+}
 })
 
 const Genre = module.exports = mongoose.model('Genre', genereSchema)

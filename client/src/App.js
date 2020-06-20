@@ -81,6 +81,7 @@ class App extends Component {
                                             render={ (props) => (
                                                         <EditBook {...props } 
                                                         book={book}
+                                                        key={book._id}
                                                         loadiing = {isLoading}
                                                         getSingleBook ={ this.getSingleBook }
                                                         />

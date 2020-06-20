@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+//const bodyParser = require('body-parser')
 const mongoose = require('mongoose') //ODM 
 
 const cors = require('cors')
@@ -9,11 +9,11 @@ const Genre = require('./models/genre')
 const Book = require('./models/book')
 
 const app = express();
-app.use(bodyParser.json())
-
+//app.use(bodyParser.json())
+app.use(express.json()) // alternate to body-parser, it comes with express now. 
 app.use(cors()) //user middleware for the CORS 
 
-mongoose.connect("mongodb://localhost:27017/node_exp_mongo_rest",(err) =>{
+mongoose.connect("mongodb://localhost:27017/node_exp_mongo_rest",{useNewUrlParser: true, useUnifiedTopology: true }, (err) =>{
     if(err) {
         throw err;
     }

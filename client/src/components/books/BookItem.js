@@ -7,12 +7,17 @@ export const BookItem = (props) => {
       // console.log(book, 'bookitem.js')
       
  const deleteItem = () => {
-    axios.delete(`http://localhost:5000/api/books/${book._id}`)
-    .then(() => console.log("book deleted "))
-
-    window.location = "/books/"
-        
-     } 
+     const toDelete = window.confirm('are you sure to delete this item ?')
+    
+     if(!toDelete) {
+        window.location = "/books";
+     }
+     else  {
+            axios.delete(`http://localhost:5000/api/books/${book._id}`)
+            //.then(() => console.log("book deleted "))
+            window.location = "/books/"
+     }  
+} 
 
     return (
         <div>  

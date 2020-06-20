@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 
 import { BookItem } from './BookItem';
 
@@ -17,10 +16,10 @@ export class Book extends Component {
      
                 { books.map( book => {
                     return(
-                    <div>
-                            <BookItem key={book._id} book = {book} isLoading ={ isLoading} />                             
-                    </div>
-                    )
+                            <div key={book._id}>
+                                    <BookItem book = {book} isLoading ={ isLoading} />                             
+                            </div>
+                         )
                 })}
             </div>
         )
