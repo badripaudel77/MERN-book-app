@@ -6,7 +6,8 @@ const cors = require('cors')
 
 const Genre = require('./models/genre')
 
-const Book = require('./models/book')
+const Book = require('./models/book');
+const genre = require('./models/genre');
 
 const app = express();
 //app.use(bodyParser.json())
@@ -35,6 +36,16 @@ app.get("/api/genres", (req, res) => {
          else {
              res.json(genresData);
          }
+    })
+})
+
+//get the genre by id
+app.get("/api/genres/:_id", (req, res) => {
+    Genre.getGenreById( req.params._id, (err, genre) => {  
+       
+        if(err) { throw err }
+
+         else { res.json(genre) }
     })
 })
 

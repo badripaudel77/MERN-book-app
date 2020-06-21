@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 export const BookItem = (props) => {
-    const { book, isLoading } = props;
+    const { book } = props;
       // console.log(book, 'bookitem.js')
       
  const deleteItem = () => {

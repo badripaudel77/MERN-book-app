@@ -9,8 +9,8 @@ export const Home = () => {
            </h1>
           
            <div style= {linkContainer}>
-                    <Link to="add/books" className="alert alert-success mr-15" style={{marginRight : '25px'}}> Add Books</Link> 
-                    <Link to="add/categories" className="alert alert-primary mr-15" style={{marginRight : '25px'}} > Add Categories</Link>
+                    <Link to="add/books" className="btn btn-primary d-block" style={{marginRight : '25px'}}> Add Books</Link> 
+                    <Link to="add/categories" className="btn btn-success d-block" style={{marginRight : '25px'}} > Add Categories</Link>
            </div>
         </div>
     )

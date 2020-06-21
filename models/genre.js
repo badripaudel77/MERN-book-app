@@ -20,12 +20,16 @@ const Genre = module.exports = mongoose.model('Genre', genereSchema)
 //get the genres
 
 module.exports.getGenres = (callback, limit) => {
-    Genre.find(callback);
-   // Genre.find(callback).limit(limit)
+     //Genre.find(callback);
+   Genre.find(callback).limit(limit)
 }
+
+module.exports.getGenreById = (id,callback) => {
+    Genre.findById(id,callback);
+}
+
 module.exports.addGenre = (genre,callback) => {
     Genre.create(genre, callback);
-   // Genre.find(callback).limit(limit)
 }
 
 module.exports.updateGenre = (id,genre,options, callback) => {
@@ -37,12 +41,9 @@ module.exports.updateGenre = (id,genre,options, callback) => {
         name : genre.name
     } 
     Genre.findOneAndUpdate(query, updatedGenre, {} , callback);
-   // Genre.find(callback).limit(limit)
 }
 
 module.exports.deleteGenre = (id,callback) => {
     const _id = id;
-
     Genre.findByIdAndDelete(_id, callback);
-   // Genre.find(callback).limit(limit)
 }

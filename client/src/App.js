@@ -14,7 +14,7 @@ import EditBook from './components/books/EditBook';
 import EditCategory from './components/category/EditCategory';
 import BookDetails from './components/books/BookDetails'
 
-class App extends Component {
+class App extends Component  {
 
       state = {
              books : [],
@@ -54,13 +54,14 @@ class App extends Component {
    }
 
   render() {
-    const { books, categories, book, isLoading } = this.state; 
-    return (  
-  <div>
-       <div className="container">
-            <Router>
+    const { books, categories, book, category, isLoading } = this.state; 
+
+return (  
+    <div>
+         <div className="container">
+              <Router>
                         <Navbar />
-                  <Switch>
+                    <Switch>
                      
                      <Route exact path= {"/"} component={Home} />
                      <Route exact path= {"/add/books"} component ={AddBook} />
@@ -72,22 +73,10 @@ class App extends Component {
                         } 
                         />
                         <Route exact path= {"/categories"} render={ props => (
-                                <Category {...props } categories ={ categories} isLoading={isLoading} />
+                                <Category {...props } categories ={categories} isLoading={isLoading} />
                               )
                         }  
-                         />
-                              <Route
-                                           exact path={ "/edit/books/:_id/" }
-                                            render={ (props) => (
-                                                        <EditBook {...props } 
-                                                        book={book}
-                                                        key={book._id}
-                                                        loadiing = {isLoading}
-                                                        getSingleBook ={ this.getSingleBook }
-                                                        />
-                                                  )      
-                                         }
-                               />
+                         /> 
                                 <Route
                                            exact path={ "/books/:_id/" }
                                             render={ (props) => (
@@ -100,17 +89,29 @@ class App extends Component {
                                          }
                                />
 
-                         <Route
-                              exact path={ "/cateogories/:_id/" }
+                                    <Route
+                                           exact path={ "/edit/books/:_id/" }
+                                            render={ (props) => (
+                                                        <EditBook {...props } 
+                                                        book={book}
+                                                        key={book._id}
+                                                        loadiing = {isLoading}
+                                                        getSingleBook ={ this.getSingleBook }
+                                                        />
+                                                  )}
+                                    />
+                           <Route
+                              exact path={ "/edit/cateogories/:_id/" }
                               render={ (props) => (
                                           <EditCategory {...props } 
-                                          category={this.state.category}
+                                          category={category}
+                                          key={category._id}
                                           loadiing = {isLoading}
                                           getSingleCategory ={this.getSingleCategory}
                                           />
-                                    )      
-                        }
-                        />              
+                                    )}
+                        />  
+                                    
                         <Route path="*" component={PageNotFound} />
                   </Switch>
             </Router>
