@@ -1,4 +1,5 @@
 # MERN_STACK_APP
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 It's an app that has two collections books and categories of book [ demo ] and has various endpoints for CRUD applications for both the collections. Built using Node, Express, MongoDb [mongoose ODM].
 
 Endpoints have been developed using Node.js using express.js framework and mongodb as Datatbase. 
